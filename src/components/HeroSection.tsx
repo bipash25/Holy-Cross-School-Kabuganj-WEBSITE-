@@ -21,7 +21,7 @@ interface HeroSectionProps {
 const defaultSlides = [
   {
     imageUrl: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1",
-    title: "Welcome to Our School",
+    title: "Holy Cross School Kabuganj",
     description:
       "Empowering minds and shaping futures through excellence in education",
   },
