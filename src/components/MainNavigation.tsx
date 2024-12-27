@@ -34,7 +34,7 @@ const MainNavigation = ({ onMobileMenuClick }: MainNavigationProps) => {
       <div className="max-w-7xl mx-auto px-4 h-full flex items-center justify-between">
         <div className="flex items-center gap-8">
           <a href="/" className="font-bold text-2xl text-primary">
-            School Logo
+            HCSK
           </a>
 
           <NavigationMenu className="hidden lg:flex">
