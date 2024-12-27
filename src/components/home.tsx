@@ -121,7 +121,7 @@ const HomePage = ({
           </div>
           <div className="mt-8 pt-8 border-t border-primary-foreground/20 text-center">
             <p>
-              &copy; {new Date().getFullYear()} School Name. All rights
+              &copy; {new Date().getFullYear()} Holy Cross School Kabuganj. All rights
               reserved.
             </p>
           </div>
