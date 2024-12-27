@@ -3,21 +3,18 @@ import MainNavigation from "./MainNavigation";
 import HeroSection from "./HeroSection";
 import QuickAccessGrid from "./QuickAccessGrid";
 import NewsGrid from "./NewsGrid";
-import VirtualTour from "./VirtualTour";
+import { Calendar, Users, BookOpen, Phone } from "lucide-react";
 
 interface HomePageProps {
   onMobileMenuClick?: () => void;
   onAdmissionsClick?: () => void;
-  onVirtualTourClick?: () => void;
 }
 
 const HomePage = ({
   onMobileMenuClick = () => console.log("Mobile menu clicked"),
   onAdmissionsClick = () => console.log("Admissions clicked"),
-  onVirtualTourClick = () => console.log("Virtual tour clicked"),
 }: HomePageProps) => {
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
-  const [virtualTourOpen, setVirtualTourOpen] = React.useState(false);
 
   return (
     <div className="min-h-screen w-full bg-background">
@@ -26,19 +23,16 @@ const HomePage = ({
       />
 
       <main className="pt-20">
-        <HeroSection
-          onAdmissionsClick={onAdmissionsClick}
-          onVirtualTourClick={() => setVirtualTourOpen(true)}
-        />
+        <HeroSection onAdmissionsClick={onAdmissionsClick} />
 
         <div className="space-y-16 py-16">
           <QuickAccessGrid
             cards={[
               {
-                title: "Virtual Tour",
-                icon: <Video className="h-6 w-6" />,
-                description: "Take a virtual tour of our campus and facilities",
-                onClick: () => setVirtualTourOpen(true),
+                title: "Academics",
+                icon: <BookOpen className="h-6 w-6" />,
+                description: "Explore our academic programs and curriculum",
+                onClick: () => (window.location.href = "/academics"),
               },
               {
                 title: "Visit Us",
@@ -54,7 +48,7 @@ const HomePage = ({
               },
               {
                 title: "Contact Us",
-                icon: <GraduationCap className="h-6 w-6" />,
+                icon: <Phone className="h-6 w-6" />,
                 description: "Get in touch with our admissions team",
                 onClick: () => (window.location.href = "/contact"),
               },
@@ -63,8 +57,6 @@ const HomePage = ({
           <NewsGrid />
         </div>
       </main>
-
-      <VirtualTour open={virtualTourOpen} onOpenChange={setVirtualTourOpen} />
 
       <footer className="bg-primary text-primary-foreground py-8 mt-16">
         <div className="max-w-7xl mx-auto px-4">

@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
-import { Calendar, BookOpen, Users, GraduationCap } from "lucide-react";
+import { Calendar, BookOpen, Users, GraduationCap, Phone } from "lucide-react";
 
 interface QuickAccessCardProps {
   title: string;
@@ -45,28 +45,28 @@ interface QuickAccessGridProps {
 const QuickAccessGrid = ({ cards }: QuickAccessGridProps) => {
   const defaultCards = [
     {
-      title: "Virtual Tour",
-      icon: <Video className="h-6 w-6" />,
-      description: "Take a virtual tour of our campus and facilities",
-      onClick: () => console.log("Virtual Tour clicked"),
+      title: "Academics",
+      icon: <BookOpen className="h-6 w-6" />,
+      description: "Explore our academic programs and curriculum",
+      onClick: () => (window.location.href = "/academics"),
     },
     {
       title: "Visit Us",
       icon: <Calendar className="h-6 w-6" />,
       description: "Schedule a campus visit or attend an open house",
-      onClick: () => console.log("Visit clicked"),
+      onClick: () => (window.location.href = "/visit"),
     },
     {
       title: "Apply Now",
       icon: <Users className="h-6 w-6" />,
       description: "Start your application process today",
-      onClick: () => console.log("Apply clicked"),
+      onClick: () => (window.location.href = "/apply"),
     },
     {
       title: "Contact Us",
-      icon: <GraduationCap className="h-6 w-6" />,
+      icon: <Phone className="h-6 w-6" />,
       description: "Get in touch with our admissions team",
-      onClick: () => console.log("Contact clicked"),
+      onClick: () => (window.location.href = "/contact"),
     },
   ];
 
