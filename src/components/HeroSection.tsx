@@ -7,7 +7,7 @@ import {
   CarouselPrevious,
 } from "./ui/carousel";
 import { Button } from "./ui/button";
-import { ArrowRight, School, Video } from "lucide-react";
+import { ArrowRight, School } from "lucide-react";
 
 interface HeroSectionProps {
   slides?: Array<{
@@ -16,7 +16,6 @@ interface HeroSectionProps {
     description: string;
   }>;
   onAdmissionsClick?: () => void;
-  onVirtualTourClick?: () => void;
 }
 
 const defaultSlides = [
@@ -43,7 +42,6 @@ const defaultSlides = [
 const HeroSection: React.FC<HeroSectionProps> = ({
   slides = defaultSlides,
   onAdmissionsClick = () => console.log("Admissions clicked"),
-  onVirtualTourClick = () => console.log("Virtual Tour clicked"),
 }) => {
   return (
     <div className="w-full h-[600px] relative bg-white">
@@ -74,7 +72,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
         <CarouselNext className="absolute right-4 top-1/2 hidden md:flex" />
       </Carousel>
 
-      <div className="absolute bottom-12 left-0 right-0 flex flex-col md:flex-row justify-center gap-4 px-4">
+      <div className="absolute bottom-12 left-0 right-0 flex justify-center px-4">
         <Button
           size="lg"
           onClick={onAdmissionsClick}
@@ -83,15 +81,6 @@ const HeroSection: React.FC<HeroSectionProps> = ({
           <School className="mr-2 h-5 w-5" />
           Start Your Application
           <ArrowRight className="ml-2 h-5 w-5" />
-        </Button>
-        <Button
-          size="lg"
-          variant="secondary"
-          onClick={onVirtualTourClick}
-          className="bg-white/90 hover:bg-white text-primary w-full md:w-auto"
-        >
-          <Video className="mr-2 h-5 w-5" />
-          Take Virtual Tour
         </Button>
       </div>
     </div>
