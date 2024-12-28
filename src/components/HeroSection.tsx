@@ -44,7 +44,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
   onAdmissionsClick = () => console.log("Admissions clicked"),
 }) => {
   return (
-    <div className="w-full h-[600px] relative bg-white">
+    <div className="w-full h-[600px] relative bg-background">
       <Carousel className="w-full h-full">
         <CarouselContent>
           {slides.map((slide, index) => (
@@ -76,7 +76,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
         <Button
           size="lg"
           onClick={onAdmissionsClick}
-          className="bg-primary hover:bg-primary/90 text-white w-full md:w-auto"
+          className="bg-primary hover:bg-primary/90 text-primary-foreground dark:bg-primary dark:text-primary-foreground dark:hover:bg-primary/90 w-full md:w-auto"
         >
           <School className="mr-2 h-5 w-5" />
           Start Your Application

@@ -1,7 +1,7 @@
 import React from "react";
 import Page from "@/components/page";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Flask, ShieldAlert, Microscope, Beaker } from "lucide-react";
+import { Beaker, ShieldAlert, Microscope } from "lucide-react";
 
 const ScienceLab = () => {
   return (
@@ -14,7 +14,7 @@ const ScienceLab = () => {
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <Flask className="w-5 h-5" /> Chemistry Lab
+                <Beaker className="w-5 h-5" /> Chemistry Lab
               </CardTitle>
             </CardHeader>
             <CardContent>
