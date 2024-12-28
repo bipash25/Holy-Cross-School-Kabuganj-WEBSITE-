@@ -21,38 +21,44 @@ import StudentConduct from "./pages/student-conduct";
 import Achievements from "./pages/achievements";
 import Gallery from "./pages/gallery";
 import Contact from "./pages/contact";
+import NotFound from "./pages/not-found";
+import { Loading } from "./components/loading";
 import routes from "tempo-routes";
 import { ThemeProvider } from "./components/theme-provider";
+import { ErrorBoundary } from "./components/error-boundary";
 
 function App() {
   return (
     <ThemeProvider defaultTheme="light" storageKey="hcsk-theme">
-      <Suspense fallback={<p>Loading...</p>}>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/vision" element={<Vision />} />
-          <Route path="/objectives" element={<Objectives />} />
-          <Route path="/message" element={<Message />} />
-          <Route path="/fees" element={<Fees />} />
-          <Route path="/curriculum" element={<Curriculum />} />
-          <Route path="/uniform" element={<Uniform />} />
-          <Route path="/timing" element={<Timing />} />
-          <Route path="/leaves" element={<Leaves />} />
-          <Route path="/library" element={<Library />} />
-          <Route path="/computer-lab" element={<ComputerLab />} />
-          <Route path="/science-lab" element={<ScienceLab />} />
-          <Route path="/examinations" element={<Examinations />} />
-          <Route path="/admission" element={<Admission />} />
-          <Route path="/parent-info" element={<ParentInfo />} />
-          <Route path="/co-curricular" element={<CoCurricular />} />
-          <Route path="/student-conduct" element={<StudentConduct />} />
-          <Route path="/achievements" element={<Achievements />} />
-          <Route path="/gallery" element={<Gallery />} />
-          <Route path="/contact" element={<Contact />} />
-        </Routes>
-        {import.meta.env.VITE_TEMPO === "true" && useRoutes(routes)}
-      </Suspense>
+      <ErrorBoundary>
+        <Suspense fallback={<Loading />}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/vision" element={<Vision />} />
+            <Route path="/objectives" element={<Objectives />} />
+            <Route path="/message" element={<Message />} />
+            <Route path="/fees" element={<Fees />} />
+            <Route path="/curriculum" element={<Curriculum />} />
+            <Route path="/uniform" element={<Uniform />} />
+            <Route path="/timing" element={<Timing />} />
+            <Route path="/leaves" element={<Leaves />} />
+            <Route path="/library" element={<Library />} />
+            <Route path="/computer-lab" element={<ComputerLab />} />
+            <Route path="/science-lab" element={<ScienceLab />} />
+            <Route path="/examinations" element={<Examinations />} />
+            <Route path="/admission" element={<Admission />} />
+            <Route path="/parent-info" element={<ParentInfo />} />
+            <Route path="/co-curricular" element={<CoCurricular />} />
+            <Route path="/student-conduct" element={<StudentConduct />} />
+            <Route path="/achievements" element={<Achievements />} />
+            <Route path="/gallery" element={<Gallery />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+          {import.meta.env.VITE_TEMPO === "true" && useRoutes(routes)}
+        </Suspense>
+      </ErrorBoundary>
     </ThemeProvider>
   );
 }

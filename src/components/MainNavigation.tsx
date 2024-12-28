@@ -17,6 +17,7 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
+import Logo from "./ui/logo";
 
 interface MainNavigationProps {
   onMobileMenuClick?: () => void;
@@ -81,8 +82,8 @@ const MainNavigation = ({ onMobileMenuClick }: MainNavigationProps) => {
     <header className="w-full h-20 bg-background border-b border-border fixed top-0 left-0 z-50">
       <div className="max-w-7xl mx-auto px-4 h-full flex items-center justify-between">
         <div className="flex items-center gap-8">
-          <a href="/" className="font-bold text-2xl text-primary">
-            HCSK
+          <a href="/" className="hover:opacity-90 transition-opacity">
+            <Logo />
           </a>
 
           <NavigationMenu className="hidden lg:flex">

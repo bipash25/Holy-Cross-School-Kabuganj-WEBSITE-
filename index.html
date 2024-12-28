@@ -2,73 +2,129 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Holy Cross School Kabuganj</title>
+
+    <!-- Primary Meta Tags -->
+    <title>Holy Cross School Kabuganj - Excellence in Education</title>
+    <meta
+      name="title"
+      content="Holy Cross School Kabuganj - Excellence in Education"
+    />
+    <meta
+      name="description"
+      content="Holy Cross School Kabuganj provides quality education fostering academic excellence, character development, and holistic growth. Join our prestigious institution for a bright future."
+    />
+    <meta
+      name="keywords"
+      content="Holy Cross School, Kabuganj, education, academic excellence, school admission, HCSK, private school, Catholic education, primary school, secondary school"
+    />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://holycrosskabuganj.edu/" />
+    <meta
+      property="og:title"
+      content="Holy Cross School Kabuganj - Excellence in Education"
+    />
+    <meta
+      property="og:description"
+      content="Holy Cross School Kabuganj provides quality education fostering academic excellence, character development, and holistic growth. Join our prestigious institution for a bright future."
+    />
+    <meta
+      property="og:image"
+      content="https://images.unsplash.com/photo-1523050854058-8df90110c9f1"
+    />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://holycrosskabuganj.edu/" />
+    <meta
+      property="twitter:title"
+      content="Holy Cross School Kabuganj - Excellence in Education"
+    />
+    <meta
+      property="twitter:description"
+      content="Holy Cross School Kabuganj provides quality education fostering academic excellence, character development, and holistic growth. Join our prestigious institution for a bright future."
+    />
+    <meta
+      property="twitter:image"
+      content="https://images.unsplash.com/photo-1523050854058-8df90110c9f1"
+    />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+
+    <!-- Additional Meta Tags -->
+    <meta name="author" content="Holy Cross School Kabuganj" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#ffffff" />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://holycrosskabuganj.edu/" />
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
     <script>
       (function () {
-  if (window.location.href.includes("framework=VITE")) {
-    const showErrorOverlay = (err) => {
-      // must be within function call because that's when the element is defined for sure.
-      const ErrorOverlay = customElements.get("vite-error-overlay");
-      // don't open outside vite environment
-      if (!ErrorOverlay) {
-        return;
-      }
-      const overlay = new ErrorOverlay(err);
-      document.body.appendChild(overlay);
-    };
-    window.addEventListener("error", showErrorOverlay);
-    window.addEventListener("unhandledrejection", ({ reason }) =>
-      showErrorOverlay(reason),
-    );
-  }
+        if (window.location.href.includes("framework=VITE")) {
+          const showErrorOverlay = (err) => {
+            // must be within function call because that's when the element is defined for sure.
+            const ErrorOverlay = customElements.get("vite-error-overlay");
+            // don't open outside vite environment
+            if (!ErrorOverlay) {
+              return;
+            }
+            const overlay = new ErrorOverlay(err);
+            document.body.appendChild(overlay);
+          };
+          window.addEventListener("error", showErrorOverlay);
+          window.addEventListener("unhandledrejection", ({ reason }) =>
+            showErrorOverlay(reason),
+          );
+        }
 
-  let parentPort = null;
-  let queuedErrorToSend = null;
+        let parentPort = null;
+        let queuedErrorToSend = null;
 
-  // Setup the transfered port
-  const initPort = (e) => {
-    if (e.data === 'init') {
-      parentPort = e.ports[0];
-      if (queuedErrorToSend) {
-        sendErrorToParent(queuedErrorToSend);
-        queuedErrorToSend = null;
-      }
-    }
-  };
+        // Setup the transfered port
+        const initPort = (e) => {
+          if (e.data === "init") {
+            parentPort = e.ports[0];
+            if (queuedErrorToSend) {
+              sendErrorToParent(queuedErrorToSend);
+              queuedErrorToSend = null;
+            }
+          }
+        };
 
-  // Listen for the intial port transfer message
-  window.addEventListener('message', initPort);
+        // Listen for the intial port transfer message
+        window.addEventListener("message", initPort);
 
-  const sendErrorToParent = (err) => {
-    if (parentPort) {
-      const serializedError = {
-        message: err.message,
-        filename: err.filename,
-        lineno: err.lineno,
-        colno: err.colno,
-        stack: err.error?.stack // Optional chaining in case `error` is undefined
-      };
+        const sendErrorToParent = (err) => {
+          if (parentPort) {
+            const serializedError = {
+              message: err.message,
+              filename: err.filename,
+              lineno: err.lineno,
+              colno: err.colno,
+              stack: err.error?.stack, // Optional chaining in case `error` is undefined
+            };
 
-      parentPort.postMessage({
-        id: 'ERROR',
-        error: serializedError,
-      });
-    } else {
-      queuedErrorToSend = err;
-    }
-  }
+            parentPort.postMessage({
+              id: "ERROR",
+              error: serializedError,
+            });
+          } else {
+            queuedErrorToSend = err;
+          }
+        };
 
-  window.addEventListener("error", sendErrorToParent);
-  window.addEventListener("unhandledrejection", ({ reason }) =>
-    sendErrorToParent(reason),
-  );
-})();
+        window.addEventListener("error", sendErrorToParent);
+        window.addEventListener("unhandledrejection", ({ reason }) =>
+          sendErrorToParent(reason),
+        );
+      })();
     </script>
   </body>
 </html>
