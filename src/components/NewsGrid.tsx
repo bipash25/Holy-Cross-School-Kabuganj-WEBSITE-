@@ -60,8 +60,8 @@ const defaultNews: NewsItem[] = [
 
 const NewsGrid = ({ news = defaultNews }: NewsGridProps) => {
   return (
-    <div className="w-full max-w-[1200px] mx-auto p-6 bg-white">
-      <h2 className="text-3xl font-bold mb-8 text-center">
+    <div className="w-full max-w-[1200px] mx-auto p-6 bg-background">
+      <h2 className="text-3xl font-bold mb-8 text-center text-foreground">
         Latest News & Achievements
       </h2>
 
@@ -72,7 +72,7 @@ const NewsGrid = ({ news = defaultNews }: NewsGridProps) => {
             whileHover={{ scale: 1.05 }}
             transition={{ duration: 0.2 }}
           >
-            <Card className="h-full cursor-pointer hover:shadow-lg transition-shadow duration-200">
+            <Card className="h-full cursor-pointer hover:shadow-lg transition-shadow duration-200 bg-card">
               <CardHeader className="p-0">
                 <div className="w-full h-48 overflow-hidden">
                   <img
@@ -83,11 +83,13 @@ const NewsGrid = ({ news = defaultNews }: NewsGridProps) => {
                 </div>
               </CardHeader>
               <CardContent className="p-4">
-                <CardTitle className="text-lg mb-2">{item.title}</CardTitle>
-                <CardDescription className="text-sm text-gray-600 mb-2">
+                <CardTitle className="text-lg mb-2 text-foreground">
+                  {item.title}
+                </CardTitle>
+                <CardDescription className="text-sm text-muted-foreground mb-2">
                   {item.description}
                 </CardDescription>
-                <p className="text-xs text-gray-400">{item.date}</p>
+                <p className="text-xs text-muted-foreground/60">{item.date}</p>
               </CardContent>
             </Card>
           </motion.div>

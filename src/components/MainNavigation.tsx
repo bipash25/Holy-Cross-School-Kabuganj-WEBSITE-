@@ -8,7 +8,7 @@ import {
   NavigationMenuLink,
 } from "@/components/ui/navigation-menu";
 import { Button } from "@/components/ui/button";
-import { Menu, Sun, Moon, ChevronDown, ChevronUp } from "lucide-react";
+import { Menu, Sun, Moon, ChevronDown, GraduationCap } from "lucide-react";
 import { useTheme } from "@/components/theme-provider";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { motion, AnimatePresence } from "framer-motion";
@@ -62,6 +62,7 @@ const MainNavigation = ({ onMobileMenuClick }: MainNavigationProps) => {
   ];
 
   const allLinks = [
+    { title: "Home", href: "/" },
     { title: "About", items: aboutLinks },
     { title: "Message", href: "/message" },
     { title: "School Info", items: schoolInfoLinks },
@@ -83,11 +84,11 @@ const MainNavigation = ({ onMobileMenuClick }: MainNavigationProps) => {
           <NavigationMenu className="hidden lg:flex">
             <NavigationMenuList>
               {allLinks.map((link) => (
-                <NavigationMenuItem key={link.title}>
+                <NavigationMenuItem key={link.title} className="relative">
                   {link.items ? (
                     <>
                       <NavigationMenuTrigger>
-                        {link.title}
+                        <span>{link.title}</span>
                       </NavigationMenuTrigger>
                       <NavigationMenuContent>
                         <motion.ul
@@ -95,7 +96,7 @@ const MainNavigation = ({ onMobileMenuClick }: MainNavigationProps) => {
                           animate={{ opacity: 1, y: 0 }}
                           exit={{ opacity: 0, y: -10 }}
                           transition={{ duration: 0.2 }}
-                          className="grid w-[400px] gap-3 p-4"
+                          className="grid w-[400px] gap-3 p-4 bg-popover rounded-md shadow-md relative"
                         >
                           {link.items.map((item) => (
                             <motion.li
@@ -144,6 +145,15 @@ const MainNavigation = ({ onMobileMenuClick }: MainNavigationProps) => {
             ) : (
               <Moon className="h-5 w-5" />
             )}
+          </Button>
+
+          <Button
+            variant="default"
+            className="hidden lg:flex items-center gap-2 bg-primary/90 hover:bg-primary/70 dark:bg-primary/80 dark:hover:bg-primary/60"
+            onClick={() => (window.location.href = "/admission")}
+          >
+            <GraduationCap className="h-4 w-4" />
+            Apply Now
           </Button>
 
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -227,6 +237,18 @@ const MainNavigation = ({ onMobileMenuClick }: MainNavigationProps) => {
                     </motion.div>
                   ))}
                 </AnimatePresence>
+
+                <Button
+                  variant="default"
+                  className="mt-4 w-full flex items-center justify-center gap-2 bg-primary/90 hover:bg-primary/70 dark:bg-primary/80 dark:hover:bg-primary/60"
+                  onClick={() => {
+                    setIsOpen(false);
+                    window.location.href = "/admission";
+                  }}
+                >
+                  <GraduationCap className="h-4 w-4" />
+                  Apply Now
+                </Button>
               </div>
             </SheetContent>
           </Sheet>

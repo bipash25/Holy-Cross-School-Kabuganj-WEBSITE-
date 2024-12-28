@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
-import { Calendar, BookOpen, Users, GraduationCap, Phone } from "lucide-react";
+import { Calendar, BookOpen, Users, Phone } from "lucide-react";
 
 interface QuickAccessCardProps {
   title: string;
@@ -17,11 +17,11 @@ const QuickAccessCard = ({
 }: QuickAccessCardProps) => {
   return (
     <Card
-      className="cursor-pointer transition-all hover:scale-105"
+      className="cursor-pointer transition-all hover:scale-105 bg-card hover:shadow-lg"
       onClick={onClick}
     >
       <CardHeader className="space-y-1">
-        <CardTitle className="flex items-center gap-2 text-lg">
+        <CardTitle className="flex items-center gap-2 text-lg text-foreground">
           {icon}
           {title}
         </CardTitle>
