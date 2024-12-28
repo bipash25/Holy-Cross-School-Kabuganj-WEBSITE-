@@ -3,12 +3,12 @@ import {
   NavigationMenu,
   NavigationMenuContent,
   NavigationMenuItem,
+  NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-  NavigationMenuLink,
 } from "@/components/ui/navigation-menu";
 import { Button } from "@/components/ui/button";
-import { Menu, Sun, Moon, ChevronDown, GraduationCap } from "lucide-react";
+import { Menu, Sun, Moon, ChevronDown, GraduationCap, X } from "lucide-react";
 import { useTheme } from "@/components/theme-provider";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { motion, AnimatePresence } from "framer-motion";
@@ -23,7 +23,7 @@ interface MainNavigationProps {
 }
 
 const MainNavigation = ({ onMobileMenuClick }: MainNavigationProps) => {
-  const { theme, setTheme } = useTheme();
+  const { theme, setTheme, themeButtonRef } = useTheme();
   const [isOpen, setIsOpen] = React.useState(false);
   const [openSections, setOpenSections] = React.useState<string[]>([]);
 
@@ -31,6 +31,10 @@ const MainNavigation = ({ onMobileMenuClick }: MainNavigationProps) => {
     setOpenSections((prev) =>
       prev.includes(title) ? prev.filter((t) => t !== title) : [...prev, title],
     );
+  };
+
+  const handleThemeToggle = (e: React.MouseEvent) => {
+    setTheme(theme === "dark" ? "light" : "dark", e);
   };
 
   const aboutLinks = [
@@ -84,45 +88,36 @@ const MainNavigation = ({ onMobileMenuClick }: MainNavigationProps) => {
           <NavigationMenu className="hidden lg:flex">
             <NavigationMenuList>
               {allLinks.map((link) => (
-                <NavigationMenuItem key={link.title} className="relative">
+                <NavigationMenuItem key={link.title}>
                   {link.items ? (
                     <>
-                      <NavigationMenuTrigger>
-                        <span>{link.title}</span>
+                      <NavigationMenuTrigger className="text-base">
+                        {link.title}
                       </NavigationMenuTrigger>
                       <NavigationMenuContent>
-                        <motion.ul
-                          initial={{ opacity: 0, y: -10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0, y: -10 }}
-                          transition={{ duration: 0.2 }}
-                          className="grid w-[400px] gap-3 p-4 bg-popover rounded-md shadow-md relative"
-                        >
+                        <ul className="grid w-[400px] gap-3 p-4 md:w-[400px] bg-popover">
                           {link.items.map((item) => (
-                            <motion.li
-                              key={item.href}
-                              initial={{ opacity: 0, x: -10 }}
-                              animate={{ opacity: 1, x: 0 }}
-                              transition={{ duration: 0.2, delay: 0.1 }}
-                            >
+                            <li key={item.href}>
                               <NavigationMenuLink asChild>
                                 <a
                                   href={item.href}
                                   className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
                                 >
-                                  {item.title}
+                                  <span className="text-base">
+                                    {item.title}
+                                  </span>
                                 </a>
                               </NavigationMenuLink>
-                            </motion.li>
+                            </li>
                           ))}
-                        </motion.ul>
+                        </ul>
                       </NavigationMenuContent>
                     </>
                   ) : (
                     <NavigationMenuLink asChild>
                       <a
                         href={link.href}
-                        className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50"
+                        className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-base transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50"
                       >
                         {link.title}
                       </a>
@@ -136,20 +131,36 @@ const MainNavigation = ({ onMobileMenuClick }: MainNavigationProps) => {
 
         <div className="flex items-center gap-4">
           <Button
+            ref={themeButtonRef}
             variant="ghost"
             size="icon"
-            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+            className="h-10 w-10 relative"
+            onClick={handleThemeToggle}
           >
-            {theme === "dark" ? (
-              <Sun className="h-5 w-5" />
-            ) : (
-              <Moon className="h-5 w-5" />
-            )}
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.div
+                key={theme === "dark" ? "dark" : "light"}
+                initial={{ scale: 0.5, opacity: 0, rotate: -180 }}
+                animate={{ scale: 1, opacity: 1, rotate: 0 }}
+                exit={{ scale: 0.5, opacity: 0, rotate: 180 }}
+                transition={{
+                  duration: 0.3,
+                  ease: [0.23, 1, 0.32, 1],
+                }}
+                className="absolute inset-0 flex items-center justify-center"
+              >
+                {theme === "dark" ? (
+                  <Sun className="h-5 w-5" />
+                ) : (
+                  <Moon className="h-5 w-5" />
+                )}
+              </motion.div>
+            </AnimatePresence>
           </Button>
 
           <Button
             variant="default"
-            className="hidden lg:flex items-center gap-2 bg-primary/90 hover:bg-primary/70 dark:bg-primary/80 dark:hover:bg-primary/60"
+            className="hidden lg:flex items-center gap-2 bg-primary hover:bg-primary/90 transition-all duration-200 ease-in-out text-primary-foreground"
             onClick={() => (window.location.href = "/admission")}
           >
             <GraduationCap className="h-4 w-4" />
@@ -158,15 +169,19 @@ const MainNavigation = ({ onMobileMenuClick }: MainNavigationProps) => {
 
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild className="lg:hidden">
-              <Button variant="ghost" size="icon">
-                <Menu className="h-6 w-6" />
+              <Button variant="ghost" size="icon" className="h-10 w-10">
+                {isOpen ? (
+                  <X className="h-7 w-7" />
+                ) : (
+                  <Menu className="h-6 w-6" />
+                )}
               </Button>
             </SheetTrigger>
             <SheetContent
               side="right"
-              className="w-[300px] sm:w-[400px] overflow-y-auto"
+              className="w-[300px] sm:w-[400px] overflow-y-auto px-2 bg-background"
             >
-              <div className="flex flex-col gap-4 mt-8">
+              <div className="flex flex-col gap-2 mt-8">
                 <AnimatePresence>
                   {allLinks.map((link) => (
                     <motion.div
@@ -174,7 +189,8 @@ const MainNavigation = ({ onMobileMenuClick }: MainNavigationProps) => {
                       initial={{ opacity: 0, x: 20 }}
                       animate={{ opacity: 1, x: 0 }}
                       exit={{ opacity: 0, x: 20 }}
-                      transition={{ duration: 0.2 }}
+                      transition={{ duration: 0.3, ease: "easeOut" }}
+                      className="px-2"
                     >
                       {link.items ? (
                         <Collapsible
@@ -184,11 +200,9 @@ const MainNavigation = ({ onMobileMenuClick }: MainNavigationProps) => {
                           <CollapsibleTrigger asChild>
                             <Button
                               variant="ghost"
-                              className="w-full justify-between"
+                              className="w-full justify-between transition-all duration-200 ease-in-out p-2 h-auto"
                             >
-                              <span className="text-lg font-medium">
-                                {link.title}
-                              </span>
+                              <span className="text-base">{link.title}</span>
                               <motion.span
                                 initial={false}
                                 animate={{
@@ -196,28 +210,34 @@ const MainNavigation = ({ onMobileMenuClick }: MainNavigationProps) => {
                                     ? 180
                                     : 0,
                                 }}
-                                transition={{ duration: 0.2 }}
+                                transition={{
+                                  duration: 0.3,
+                                  ease: "easeInOut",
+                                }}
                               >
                                 <ChevronDown className="h-5 w-5" />
                               </motion.span>
                             </Button>
                           </CollapsibleTrigger>
-                          <CollapsibleContent className="pl-4 space-y-2 mt-2">
+                          <CollapsibleContent className="pl-4 space-y-1">
                             <motion.div
                               initial={{ opacity: 0 }}
                               animate={{ opacity: 1 }}
                               exit={{ opacity: 0 }}
-                              transition={{ duration: 0.2 }}
+                              transition={{ duration: 0.3, ease: "easeOut" }}
                             >
                               {link.items.map((item) => (
                                 <motion.a
                                   key={item.href}
                                   href={item.href}
-                                  className="block py-2 text-muted-foreground hover:text-foreground transition-colors"
+                                  className="block py-2 text-base text-muted-foreground hover:text-foreground transition-all duration-200 ease-in-out"
                                   onClick={() => setIsOpen(false)}
-                                  initial={{ opacity: 0, x: -10 }}
+                                  initial={{ opacity: 0, x: -20 }}
                                   animate={{ opacity: 1, x: 0 }}
-                                  transition={{ duration: 0.2 }}
+                                  transition={{
+                                    duration: 0.3,
+                                    ease: "easeOut",
+                                  }}
                                 >
                                   {item.title}
                                 </motion.a>
@@ -228,7 +248,7 @@ const MainNavigation = ({ onMobileMenuClick }: MainNavigationProps) => {
                       ) : (
                         <a
                           href={link.href}
-                          className="block text-lg font-medium hover:text-primary py-2"
+                          className="block text-base hover:text-primary py-2 px-2 transition-all duration-200 ease-in-out text-foreground"
                           onClick={() => setIsOpen(false)}
                         >
                           {link.title}
@@ -240,7 +260,7 @@ const MainNavigation = ({ onMobileMenuClick }: MainNavigationProps) => {
 
                 <Button
                   variant="default"
-                  className="mt-4 w-full flex items-center justify-center gap-2 bg-primary/90 hover:bg-primary/70 dark:bg-primary/80 dark:hover:bg-primary/60"
+                  className="mt-4 w-full flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 transition-all duration-200 ease-in-out text-primary-foreground"
                   onClick={() => {
                     setIsOpen(false);
                     window.location.href = "/admission";
