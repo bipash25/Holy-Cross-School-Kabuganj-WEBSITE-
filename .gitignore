@@ -7,7 +7,7 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules/*
+node_modules
 dist
 dist-ssr
 *.local
@@ -23,7 +23,22 @@ dist-ssr
 *.sln
 *.sw?
 
-!node_modules/.vite
+# Environment files
+.env
+.env.*
+!.env.example
 
-**/tempobook/dynamic/
-**/tempobook/storyboards/
+# Build files
+build
+out
+.next
+.vercel
+.output
+
+# Coverage directory
+coverage
+
+# Temporary files
+.temp
+.tmp
+.cache
