@@ -23,22 +23,12 @@ dist-ssr
 *.sln
 *.sw?
 
-# Environment files
+# Environment variables
 .env
-.env.*
-!.env.example
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 
-# Build files
-build
-out
-.next
-.vercel
-.output
-
-# Coverage directory
-coverage
-
-# Temporary files
-.temp
-.tmp
-.cache
+# Tempo files
+src/tempobook
