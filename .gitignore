@@ -32,3 +32,10 @@ dist-ssr
 
 # Tempo files
 src/tempobook
+
+
+# Tempo
+ 
+node_modules/
+**/tempobook/dynamic/
+**/tempobook/storyboards/
