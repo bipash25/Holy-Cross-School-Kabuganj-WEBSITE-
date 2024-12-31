@@ -23,12 +23,11 @@ dist-ssr
 *.sln
 *.sw?
 
-<<<<<<< HEAD
 # Tempo
 node_modules/
 **/tempobook/dynamic/
 **/tempobook/storyboards/
-=======
+
 # Environment variables
 .env
 .env.local
@@ -38,11 +37,3 @@ node_modules/
 
 # Tempo files
 src/tempobook
-
-
-# Tempo
- 
-node_modules/
-**/tempobook/dynamic/
-**/tempobook/storyboards/
->>>>>>> 8f7ab9677904b69c65fffc3f502542703c24b379
