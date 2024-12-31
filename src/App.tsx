@@ -23,7 +23,7 @@ import Gallery from "./pages/gallery";
 import Contact from "./pages/contact";
 import NotFound from "./pages/not-found";
 import { Loading } from "./components/loading";
-import routes from "tempo-routes";
+import routes from "./lib/tempo-routes";
 import { ThemeProvider } from "./components/theme-provider";
 import { ErrorBoundary } from "./components/error-boundary";
 
